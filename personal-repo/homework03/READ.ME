@@ -1,0 +1,19 @@
+This homework involves implementing sparse matrix-vector multiply (SpMV) on CPUs
+
+1) To understand what this is please read Section 3 of
+https://www.nvidia.com/docs/IO/77944/sc09-spmv-throughput.pdf
+You will need to understand how COO and CSR formats work.
+
+2) Implement three functions -
+  a) convert_coo_to_csr - converts COO format to CSR format
+  b) spmv_coo - calculates SpMV using the COO format
+  c) spmv - calculates SpMV using the CSR format
+
+3) All implementations should be parallelized.
+Implementing a serial version is not required (but you are free to do so, as it might help you implement and debug the parallel version).
+Test your code on the 'cant' matrix and make sure the answer matches the provided anwer.
+It may be off by a very small amount (e.g., < 10^-6)
+
+4) Discuss the performance of the two implementations based on the input in the 'cant' directory and write up a report.
+
+5) This homework will be due on November 10th, 11:59 PM.

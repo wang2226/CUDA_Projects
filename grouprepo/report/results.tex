@@ -1,0 +1,357 @@
+This section shows the results from our experiments as well as analysis for the performance.
+
+\subsection{Serial}
+This table below shows the result for our serial implementation. Time is measured in seconds.
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.00019 & 0.0051 & 0.0292  & 0.272    \\ 
+\hline
+9x9                              & 0.00069 & 0.0269 & 0.4572  & 12.669   \\ 
+\hline
+12x12                            & 0.00184 & 0.1324 & 4.6165  & 271.388  \\ 
+\hline
+15x15                            & 0.00415 & 0.4375 & 29.651  & -        \\ 
+\hline
+18x18                            & 0.00874 & 1.1842 & 158.13  & -        \\ 
+\hline
+21x21                            & 0.01346 & 2.8423 & 571.07  & -        \\ 
+\hline
+24x24                            & 0.01722 & 6.8895 & 1718.01 & -        \\
+\hline
+\end{tabular}
+\caption{Serial Result}
+\end{table}
+
+\noindent
+Our serial implementation definitely suffers with larger board size and deeper depth. Due to limited computing resources, we were not able to run board size larger than 12x12 at depth 4.
+
+\subsection{OpenMP}
+This table below shows the result for our OpenMP solution, using 32 threads. Time is measured in seconds. 
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.0083 & 0.009 & 0.01    & 0.03    \\ 
+\hline
+9x9                              & 0.0086 & 0.009 & 0.05    & 2.712   \\ 
+\hline
+12x12                            & 0.0067 & 0.027 & 0.42    & 56.947  \\ 
+\hline
+15x15                            & 0.0075 & 0.036 & 2.62    & -        \\ 
+\hline
+18x18                            & 0.0065 & 0.077 & 13.21   & -        \\ 
+\hline
+21x21                            & 0.0082 & 0.17  & 109.87  & -        \\ 
+\hline
+24x24                            & 0.0075 & 0.41  & 358.98  & -        \\
+\hline
+\end{tabular}
+\caption{OpenMP Result}
+\end{table}
+
+\noindent
+Our OpenMP solution performs worse than the serial implementation when the boards size is smaller than 12x12 and depth is less than 2; Our OpenMP solution achieves good speedup, up to ~16x when the board size is larger than 21x21 and depth = 2. However, even with OpenMP, it still took too long to run board size larger than 15 at depth = 4. The figure  below shows the speedup factor on a logarithmic scale ($\log_{10}$) for different board size at depth = 1, 2, 3, 4 compared to the serial implementation\\
+
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+        title = {OpenMP: Speedup on a Logarithmic Scale},
+		xlabel=Depth,
+		xtick={1,2,3,4},
+		ylabel=$\log_{10}$ of Speedup Factor,
+		legend pos=outer north east]
+    \addplot table {./data/omp6.dat};
+    \addplot table {./data/omp9.dat};
+    \addplot table {./data/omp12.dat};
+    \addplot table {./data/omp15.dat};
+    \addplot table {./data/omp18.dat};
+    \addplot table {./data/omp21.dat};
+    \addplot table {./data/omp24.dat};
+    \addlegendentry{$6x6$};
+    \addlegendentry{$9x9$};
+    \addlegendentry{$12x12$};
+    \addlegendentry{$15x15$};
+    \addlegendentry{$18x18$};
+    \addlegendentry{$21x21$};
+    \addlegendentry{$24x24$};
+	\end{axis}
+\end{tikzpicture}
+
+\subsection{Naive CUDA}
+This table below shows the result for our Naive CUDA solution. Time is measured in seconds.
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.079   & 0.093 & 0.268  & 17.051    \\ 
+\hline
+9x9                              & 0.08    & 0.117 & 2.906  & -   \\ 
+\hline
+12x12                            & 0.082   & 0.184 & 29.96 & -  \\ 
+\hline
+15x15                            & 0.082   & 0.258 & -      & -        \\ 
+\hline
+18x18                            & 0.081   & 0.342 & -      & -        \\ 
+\hline
+21x21                            & 0.082   & 0.545 & -      & -        \\ 
+\hline
+24x24                            & 0.083   & 0.891 & -      & -        \\
+\hline
+\end{tabular}
+\caption{Naive CUDA}
+\end{table}
+
+\noindent
+Our Naive CUDA implementation achieved up to 7x speedup for board size larger than 15x15 at depth = 2. However, it did not achieve the same level of speedup as OpenMP did. In addition, it has memory issues when we try to run larger board size at depth 3 and 4. The limitations of the Naive CUDA implementation that were laid out in Section~\ref{sec:gpu} are shown here.\\
+
+\subsection{Sequential-Parallel CUDA}
+This table below shows the result for our Sequential Parallel CUDA solution, using 768 threads per block. Time is measured in seconds.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{(total depth, sequential depth)}     \\ 
+\cline{2-5}
+                                 & (2,1)       & (3,2)      & (4.2)       & (4,3)        \\ 
+\hline
+6x6                              & 0.010   & 0.037 & 0.577  & 0.550    \\ 
+\hline
+9x9                              & 0.037    & 0.292 & 67.37  & 13.77   \\ 
+\hline
+12x12                            & 0.119   & 1.728 & 1999.45 & 131.92  \\ 
+\hline
+15x15                            & 0.193   & 6.649 & -      & -        \\ 
+\hline
+18x18                            & 0.310   & 11.66 & -      & -        \\ 
+\hline
+21x21                            & 0.573   & 31.72 & -      & -        \\ 
+\hline
+24x24                            & 0.868   & - & -      & -        \\
+\hline
+\end{tabular}
+\caption{Sequential Parallel CUDA}
+\end{table}
+
+\noindent
+Our Sequential Parallel CUDA achieved steady speedup at depth = 3, and it achieved speedup up to \textasciitilde{31}x at depth = 4 for board size 6x6. The figure  below shows the speedup factor on a logarithmic scale ($\log_{10}$) for different board size at depth = 2, 3, 4 against Naive CUDA.\\ 
+\\
+Due to the current implementation, the sequential-parallel implementation runs into memory issues at large board size and large depth. This is primarily due to the fact that we have to keep track of all the leaf nodes from the sequential step. Recall from Section~\ref{sec:gpu} that this implementation stores each board state that the sequential step produces. For total depth=4 and sequential depth=3, at board 15x15, we are storing up to $224*223*222=11,089,344$ integers just in the first step. With other necessary allocations, this method quickly runs of GPU memory. Another important comparison to note here is the difference between the (4,2) and (4,3) setup. As evident from our results, we find that our performance degrades substantially moving from a sequential depth of 3 to 2. This is due to warp divergence that was mentioned in Section~\ref{sec:gpu} as a limitation of the current CUDA heuristic function. Compared to naive CPU, The below compared the speedup to naive CUDA. Note that some data is missing due to naive CUDA taking too long to complete for some of sequential-parallel's counterparts. \\
+
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+        title = {Sequential-parallel: Speedup on a Logarithmic Scale},
+		xlabel=Depth,
+		xtick={2,3,4},
+		ylabel=$\log_{10}$ of Speedup Factor,
+		legend pos=outer north east]
+    \addplot table {./data/seq6.dat};
+    \addplot table {./data/seq9.dat};
+    \addplot table {./data/seq12.dat};
+    \addplot table {./data/seq15.dat};
+    \addplot table {./data/seq18.dat};
+    \addplot table {./data/seq21.dat};
+    \addplot table {./data/seq24.dat};
+    \addlegendentry{$6x6$};
+    \addlegendentry{$9x9$};
+    \addlegendentry{$12x12$};
+    \addlegendentry{$15x15$};
+    \addlegendentry{$18x18$};
+    \addlegendentry{$21x21$};
+    \addlegendentry{$24x24$};
+	\end{axis}
+\end{tikzpicture}
+
+
+\subsection{PVS CUDA}
+This table below shows the result for our PVS CUDA solution, using 768 threads per block. Time is measured in seconds.\\
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.0045 & 0.013 & 0.086  & 0.199    \\ 
+\hline
+9x9                              & 0.0058 & 0.027 & 1.34   & 0.365   \\ 
+\hline
+12x12                            & 0.0062 & 0.012 & 5.56   & 2.845  \\ 
+\hline
+15x15                            & 0.0052 & 0.016 & 159.05 & 10.498        \\ 
+\hline
+18x18                            & 0.0061 & 0.025 & 161.88 & -        \\ 
+\hline
+21x21                            & 0.0069 & 0.037 & -      & -        \\ 
+\hline
+24x24                            & 0.0073 & 0.056 & -      & -        \\
+\hline
+\end{tabular}
+\caption{PVS CUDA}
+\end{table}
+
+\noindent
+Our PVS implementation achieves very good speedup against Naive CUDA implementation. It achieves steady speedup around \textasciitilde{17}x across all board size at depth = 1 and depth = 2, around \textasciitilde{3}x speedup at depth = 3. The figure  below shows the speedup factor on a logarithmic scale ($\log_{10}$) for different board size at depth = 1, 2, 3, 4 against Naive CUDA.\\
+
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+        title = {PVS: Speedup on a Logarithmic Scale},
+		xlabel=Depth,
+		xtick={1,2,3,4},
+		ylabel=$\log_{10}$ of Speedup Factor,
+		legend pos=outer north east]
+    \addplot table {./data/pvs6.dat};
+    \addplot table {./data/pvs9.dat};
+    \addplot table {./data/pvs12.dat};
+    \addplot table {./data/pvs15.dat};
+    \addplot table {./data/pvs18.dat};
+    \addplot table {./data/pvs21.dat};
+    \addplot table {./data/pvs24.dat};
+    \addlegendentry{$6x6$};
+    \addlegendentry{$9x9$};
+    \addlegendentry{$12x12$};
+    \addlegendentry{$15x15$};
+    \addlegendentry{$18x18$};
+    \addlegendentry{$21x21$};
+    \addlegendentry{$24x24$};
+	\end{axis}
+\end{tikzpicture}
+
+\subsection{Dynamic Parallelism CUDA}
+This table below shows the result for our Dynamic Parallelism CUDA solution, using 768 threads per block. Time is measured in seconds.\\
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.0038 & 0.048 & 4.74  & -    \\ 
+\hline
+9x9                              & 0.0047 & 0.886 & 141.48  & -   \\ 
+\hline
+12x12                            & 0.0058 & 13.538 & -  & -  \\ 
+\hline
+15x15                            & 0.0081 & 29.12 & - & -        \\ 
+\hline
+18x18                            & 0.0094 & 36.92 & -  & -        \\ 
+\hline
+21x21                            & 0.0121 & - & -  & -        \\ 
+\hline
+24x24                            & 0.0147 & - & - & -        \\
+\hline
+\end{tabular}
+\caption{Dynamic Parallelism CUDA}
+\end{table}
+
+\noindent
+Our Dynamic Parallelism achieved good speedup against Naive CUDA implementation across all board size at depth = 1. However, it performed worse than naive CUDA at higher depth and larger board size.To find out the reason, we used \textit{nvprof} tool to see which part is taking the most time during the execution. For board size of 12x12, depth = 2, the result of nvprof report is shown below.\\
+
+\begin{verbatim}
+GPU activities:
+
+Time     Calls Name
+10.912us 6     [CUDA memcpy HtoD]
+5.7920us 2     [CUDA memcpy DtoH]
+3.3920us 2     [CUDA memset]
+
+API Calls:
+
+Time     Calls Name
+12.4633s 8     cudaMemcpy
+\end{verbatim}
+
+\noindent
+In \textit{nvprof}, section "GPU activities" lists activities which execute on the GPU, such as kernel, CUDA memcpy, CUDA memset. The timing information here represents the execution time on the GPU. Section "API calls" list CUDA Runtime/Driver API calls, the timing information here represents the execution time on the host. As shown above, cudaMemcpy takes overwhelming long time during the execution. This is the main reason for its slower performance than PVS.
+
+\subsection{Overall Speedup Comparison}
+The table below lists the speedup each method achieved for board size 15x15, and depth = 2. Except for the dynamic parallelism CUDA, we see performance improvements all across the board, peaking at 27x speedup for this configuration. Of the data that we collected (some configurations took too long / ran out of memory), the peak speedup was with board size 12x12 with depth=4 where the serial implementation took 271.388s and PVS CUDA took 2.845s resulting in a \textasciitilde{100}x speedup. 
+
+\begin{table}[!htbp]
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Time} & \textbf{Speedup} \\ \hline
+Serial          & 0.4375        &                  \\ \hline
+OpenMP          & 0.036         & 12.15x           \\ \hline
+Naive           & 0.258         & 1.70x            \\ \hline
+Sequential      & 0.193         & 2.27x            \\ \hline
+PVS             & 0.016         & 27.34x           \\ \hline
+Dynamic         & 29.12         & 0.02x            \\ \hline
+\end{tabular}
+\caption{Overall Speedup Comparison}
+\end{table}
+
+
+\subsection{Test a Whole Game}
+The two tables below are the results to run a whole game for PVS and Dynamic CUDA, using 768 threads per block.\\
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.0138  & 0.11  & -  & -    \\ 
+\hline
+9x9                              & 0.015   & 0.60  & -  & -   \\ 
+\hline
+12x12                            & 0.016   & 1.54  & -  & -  \\ 
+\hline
+15x15                            & 0.020   & 10.85 & - & -        \\ 
+\hline
+18x18                            & 0.028   & 18.88 & -  & -        \\ 
+\hline
+21x21                            & 0.033   & 99.04 & -  & -        \\ 
+\hline
+24x24                            & 0.034   & -     & - & -        \\
+\hline
+\end{tabular}
+\caption{PVS: automated game}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|} 
+\hline
+\multirow{2}{*}{Board dimension} & \multicolumn{4}{c|}{Search Depth}     \\ 
+\cline{2-5}
+                                 & 1       & 2      & 3       & 4        \\ 
+\hline
+6x6                              & 0.0238  & 0.349  & 24.921  & -    \\ 
+\hline
+9x9                              & 0.0306   & 7.618  & -  & -   \\ 
+\hline
+12x12                            & 0.0468   & 278.748  & -  & -  \\ 
+\hline
+15x15                            & 0.0718   & - & - & -        \\ 
+\hline
+18x18                            & 0.0998   & - & -  & -        \\ 
+\hline
+21x21                            & 0.145   & - & -  & -        \\ 
+\hline
+24x24                            & 0.178   & -     & - & -        \\
+\hline
+\end{tabular}
+\caption{Dynamic: automated game}
+\end{table}
+
+\noindent
+As the results shown, our PVS and Dynamic CUDA can only run on smaller problem size. 

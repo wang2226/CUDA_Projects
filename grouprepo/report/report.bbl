@@ -1,0 +1,134 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{8}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Allis}{Allis}{1994}]%
+        {allis_1994}
+\bibfield{author}{\bibinfo{person}{Louis Allis}.}
+  \bibinfo{year}{1994}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Searching for Solutions in Games and
+  Artifcial Intelligence}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Borovska and Lazarova}{Borovska and
+  Lazarova}{2007}]%
+        {borovska}
+\bibfield{author}{\bibinfo{person}{Plamenka Borovska} {and}
+  \bibinfo{person}{Milena Lazarova}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Efficiency of parallel minimax algorithm for game
+  tree search}.
+\newblock \bibinfo{journal}{\emph{ACM International Conference Proceeding
+  Series}}  \bibinfo{volume}{285}, \bibinfo{pages}{14}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1330598.1330615}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Mandadi, Vijayakumar, and B.}{Mandadi
+  et~al\mbox{.}}{2020}]%
+        {Mandadi}
+\bibfield{author}{\bibinfo{person}{Sravya Mandadi}, \bibinfo{person}{Sanjan
+  Vijayakumar}, {and} \bibinfo{person}{Tejashwini B.}}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{IMPLEMENTATION OF SEQUENTIAL AND PARALLEL
+  ALPHA-BETA PRUNING ALGORITHM}.
+\newblock \bibinfo{journal}{\emph{International Journal of Innovations in
+  Engineering and Technology}}  \bibinfo{volume}{7} (\bibinfo{date}{08}
+  \bibinfo{year}{2020}), \bibinfo{pages}{98--104}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Marsland and Bj\"{o}rnsson}{Marsland and
+  Bj\"{o}rnsson}{1997}]%
+        {pvs}
+\bibfield{author}{\bibinfo{person}{Tony Marsland} {and} \bibinfo{person}{Yngvi
+  Bj\"{o}rnsson}.} \bibinfo{year}{1997}\natexlab{}.
+\newblock \showarticletitle{From Minimax to Manhattan}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 4th AAAI Conference on Deep Blue
+  Versus Kasparov: The Significance for Artificial Intelligence}}
+  \emph{(\bibinfo{series}{AAAIWS'97-04})}. \bibinfo{publisher}{AAAI Press},
+  \bibinfo{pages}{31–36}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Nvidia}{Nvidia}{2012a}]%
+        {dp}
+\bibfield{author}{\bibinfo{person}{Nvidia}.} \bibinfo{year}{2012}\natexlab{a}.
+\newblock \bibinfo{title}{CUDA Dynamic Parallelism Programming Guide}.
+\newblock
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Nvidia}{Nvidia}{2012b}]%
+        {dp2}
+\bibfield{author}{\bibinfo{person}{Nvidia}.} \bibinfo{year}{2012}\natexlab{b}.
+\newblock \bibinfo{title}{Dynamic Parallelism in CUDA}.
+\newblock
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Rocki and Suda}{Rocki and Suda}{2010}]%
+        {Rocki}
+\bibfield{author}{\bibinfo{person}{Kamil Rocki} {and} \bibinfo{person}{Reiji
+  Suda}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{Parallel Minimax Tree Searching on GPU}. In
+  \bibinfo{booktitle}{\emph{Parallel Processing and Applied Mathematics}},
+  \bibfield{editor}{\bibinfo{person}{Roman Wyrzykowski}, \bibinfo{person}{Jack
+  Dongarra}, \bibinfo{person}{Konrad Karczewski}, {and} \bibinfo{person}{Jerzy
+  Wasniewski}} (Eds.). \bibinfo{publisher}{Springer Berlin Heidelberg},
+  \bibinfo{address}{Berlin, Heidelberg}, \bibinfo{pages}{449--456}.
+\newblock
+\showISBNx{978-3-642-14390-8}
+
+
+\bibitem[\protect\citeauthoryear{Strnad and Guid}{Strnad and Guid}{2011}]%
+        {pvsgpu}
+\bibfield{author}{\bibinfo{person}{Damjan Strnad} {and} \bibinfo{person}{Nikola
+  Guid}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Parallel Alpha-Beta Algorithm on the GPU}.
+\newblock \bibinfo{journal}{\emph{CIT}}  \bibinfo{volume}{19}
+  (\bibinfo{date}{12} \bibinfo{year}{2011}), \bibinfo{pages}{269--274}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.2498/cit.1002029}
+\showDOI{\tempurl}
+
+
+\end{thebibliography}

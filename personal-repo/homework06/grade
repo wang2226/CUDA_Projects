@@ -1,0 +1,4 @@
+9/10
+
+Incorrect answer - does not coverge after 20,000 iterations to required accuracy.
+Reduce kernel is only called once - it should be called repeatedly on progressively smaller array.

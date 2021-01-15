@@ -1,0 +1,17 @@
+For CPU implementations we explore two options: 1) serial, 2) OpenMP parallelized version. As explained in Section~\ref{sec:minimax}, finding the best move is fairly trivial once the minimax algorithm is well defined. Since we have a for loop that can parallelized, (i.e. no data dependency between the sub-trees etc.) the OpenMP implementation simply adds a \mintinline{C}{#pragma omp parallel for} on the for loop. Although it's simplicity is attractive, this strategy fails to take full advantage of alpha-beta bounds found in other sub-trees. This is a similar criticism that Borovska and Lazorova had as explained in Section~\ref{sec:relworks}.~\cite{borovska}. 
+
+\begin{algorithm}[!htbp]
+\SetAlgoLined
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{depth, currentPlayer}
+\Output{bestScore}
+
+bestScore = -$\infty$\\
+\For{each possible child move for currentPlayer }{
+        bestScore = max(bestScore, minimax-alpha-beta-pruning(child, depth-1, true, $-\infty$, $+\infty$))\;
+    }
+    return bestScore
+\caption{getBestMove}
+\label{alg:bestscore}
+\end{algorithm}

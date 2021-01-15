@@ -1,0 +1,6 @@
+9.5/10
+Good job on using the whisker plot to show statistical information.
+However, your assertion that - if you pre-sort the rows, COO will work correctly without locks - is incorrect.
+Any time that different threads update the same row, locks or synchronization is required for correctness, as you cannot make any assumptions about how the threads are scheduled and executed.
+
+

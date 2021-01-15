@@ -1,0 +1,91 @@
+Homework 4
+Due: Nov 17, 11:59 PM
+----------
+Implement the Conjugate Gradient (CG) iterative method for solving 
+a system of equations Ax = b (i.e., find x such that Ax = b), 
+where A is a sparse matrix, and b is a dense vector. x can be 
+initialized as all 0s or to some random values.
+
+The CG algorithm:
+If you want to know the details about the algorithm, you can start with the
+Wikipedia page:
+https://en.wikipedia.org/wiki/Conjugate_gradient_method
+
+Or if you don't really care, you can dive right into the algorithm shown below.
+The algorithm is also described in the above Wikipedia link, under 
+"The resulting algorithm" section.
+
+CG Algorithm:
+-------------
+Input: A, b, x0, max_iter, tol
+       x0 : the initial "guess."
+       max_iter : some maximum number of iterations before you stop.
+       tol : tolerance - if your residual is less than tolerance, you 
+         have reached a solution with a deired accuracy, so you can stop.
+Output: x0
+
+r0 = b - A * x0
+if(L2_norm(r0) < tol) then
+  x0 is the solution, so exit
+
+p0 = r0
+k = 0
+for i = 0 to max_iters do
+  alpha_(k) = (r_(k)^T * r_(k)) / (p_(k)^T * A * p_(k))  
+  x_(k+1) = x_(k) + alpha_(k) * p_(k)
+  r_(k+1) = r_(k) - alpha_(k) * A * p_(k)
+  if(L2_norm(r_(k+1) < tol) then
+    x_(k+1) is the solution, so exit
+  
+  beta_(k) = (r_(k+1)^T * r_(k+1)) / (r_(k)^T * r_(k))
+  p_(k+1) = r_(k+1) + beta_(k) * p_(k)
+  k = k + 1
+endfor
+-------------
+
+Here, in r_(k), k indicates the kth interation of the loop
+r_(k) is a vector with the same length as the input vector x0
+p_(k) is also a vector with the same length as the input vector x0
+alpha_(k) and beta_(k) are scalar values
+
+
+
+Things to note:
+---------------
+1) I have provided a skeleton code for you to use, as well as the function
+   prototypes for functions you may require to implement CG.
+   Read it carefully first.
+   Search "COMPLETE THIS FUNCTION" to see what needs to be implemented.
+   All implementations should be parallelized (or call functions that have 
+     already been parallelized).
+
+2) The code will automatically verify whether the code is correct using the
+   verify_cg() function.
+
+3) # of max iterations should be approximately 13,000 for tolerance of 1e-6, 
+   when a solution is reached, verify_cg() should print something like:
+   norm of (b - A * x): 9.823299e-07
+   Notice that the final value printed (9.823299e-07) < tolerance (1e-6).
+
+4) When you measure performance, comment out 
+   fprintf(stdout, "\tIt: %d\tresidual: %f\n", k, residual_new);
+   When debugging, this printf should print residual values that generally 
+     decrease.
+
+5) Test your code using the provided input under cant/
+   cant/A.mtx is the input sparse matrix.
+   cant/b.mtx is the b in Ax = b.
+   cant/x.mtx is the solution to Ax = b.
+
+6) Your answer should be somewhat similar to the values stored in cant/x.mtx
+   However, DO NOT directly diff this file with yours, as they will very likely
+   be different. 
+   Use the verify_cg() function to validate your answer.
+
+7) If you're not familiar with linear algebra, some of this may be confusing.
+   However, if you understand what the following are, it should be enough.
+     a) L2 norm of a vector
+     b) dot product between two vectors (of the same size)
+     c) adding two vectors (of the same size)
+   Please ask questions if you are confused!!!
+

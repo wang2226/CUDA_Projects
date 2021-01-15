@@ -1,0 +1,5 @@
+*.o
+gomoku_cpu
+gomoku_cuda
+gomoku_cuda_pvs
+gomoku_cuda_dynamic

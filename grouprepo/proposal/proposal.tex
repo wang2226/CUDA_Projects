@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{margin=1in,top=1in,bottom=1in}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\abs}[1]{\left|#1\right|}
+
+
+\title{CIS631 Project Proposal \\ AI Gomoku: Parallel Mini-Max with Alpha-Beta Prunning}
+\author{Yuya Kawakami, Haoran Wang}
+\date{Oct 9, 2020}
+
+\begin{document}
+	\maketitle
+	
+
+	\section{Summary}
+	We are going to implement a parallel Gomoku AI agent for multi-core CPU and Nvidia GPU platforms. Our agent will search through game trees in parallel using mini-max algorithm with alpha-beta pruning. We will apply OpenMP and CUDA. 
+	
+	
+	\section{Background}
+	
+	Gomoku, also known called Five-in-a-Row, originated from Japan and is very popular around the world. Two players put Go pieces strategically on a 15x15 or 19x19 board. The goal is to have 5 pieces in a row. Due to the two player zero-sum nature of the game, this is a context for which minimax with alpha-beta pruning can be used effectively. For serious players, there is a world championship and has different rules on how to declare a win. One rule states that the player has to beat his opponent before time runs out. Therefore, our AI agent's performance will be judged in a timed match.\\
+	\\Mini-max is a well known algorithm used to find the optimal move for a player in a zero-sum game. It creates a game tree for every possible move that a player can take, and then search for the optimum path. However, this will usually result in a very large game tree. Therefore, alpha-beta prunning is used to trim the game tree by removing subtree of moves that will definitely not be taken.\\
+	\\
+	An appropriate heuristic is critical for a successful mini-max application for any game, as the algorithm relies on an accurate metric to make decisions about how favorable one board scenario is for a given player. A blog page \href{https://blog.theofekfoundation.org/artificial-intelligence/2015/12/11/minimax-for-gomoku-connect-five/}{here} describes one such example for a heuristic. The idea that this author presents in this blog relies on counting how many consecutive
+	squares a player controls, whether or these have open ends, and finally whose turn it is. Combining these information, the heuristic function attemps to assign a value of each board situation. We can loosely base our initial implemenation of our heuristic function on this idea.\\
+	
+	\section{Challenges}
+
+    One challenge we face when trying to parallelize the minimax algorithm is with how to deal with data dependency in the alpha-beta pruning. Of course, if we don't plan to do alpha-beta pruning and just want to execute a mini-max search, then we can simply assign sub-trees to multiple processors for parallel processing. However, with the introdcution of alpha-beta pruning, a naive method as described will not be able to take advantage of alpha-beta bounds found by other
+    processors. Kumari et al. recongnizes this issue and notes that in this case, we can evaluate some proportion of the tree sequentially to get reasonable alpha/beta values and then use these values to process the rest of the tree in parallel. They acknowledge that this will involve some unnecessary calculation, but is "worth it" in practice. \cite{kumari_singh_2017} 
+    
+	\section{Resources}
+	\begin{itemize}
+		\item We plan to start from scratch using C/C++.
+		\item We will use computing resources from Talapas. 
+	\end{itemize}
+    
+    \section{Goals}
+    Some of our goals for this project are as follows:
+    \begin{enumerate}
+        \item Come up / research an appropriate heuristic to use for Gomoku.
+        \item Implement a sequential mini-max, alpha-beta pruning implementation for Gomoku game.
+        \item Implement an OpenMP implementation and CUDA implemenataion to compare performance.
+        \item If time allows, implement a GUI interface.
+        \item If time allows, implemet dynamic tree search (DTT) and principle variation search (PVS).
+    \end{enumerate}
+
+	
+\bibliographystyle{unsrt}
+\bibliography{references}
+\end{document}

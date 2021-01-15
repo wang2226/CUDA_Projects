@@ -1,0 +1,5 @@
+The project idea is interesting, but parallelizing alpha-beta pruning alone does not seem like a significant amount of work.
+I think adding parallel DTT and/or PVS might be more interesting and provide enough work.
+
+Please do not bother with GUI (it will not contribute to your grade).
+

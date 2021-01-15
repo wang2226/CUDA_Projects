@@ -1,0 +1,181 @@
+@online{self-attention, 
+	title={The Illustrated Transformer}, 
+	howpublished={\url{http://jalammar.github.io/illustrated-transformer/}}, 
+	author={Jay Alammar}
+}
+
+@online{TPU-1,
+	title={Google CloudTPU Architecture},
+	howpublished={\url{https://cloud.google.com/tpu/docs/system-architecture}},
+	author={Google Cloud Computing}
+}
+
+@online{TPU-2,
+	title={Google TPU Overview},
+	howpublished={\url{https://cloud.google.com/tpu/docs/system-architecture#software_architecture}},
+	author={Google Cloud Computing}
+}
+
+@online{xla, 
+	title={PYTORCH ON XLA DEVICES}, 
+	howpublished={\url{https://pytorch.org/xla/release/1.5/index.html#}}, 
+	author={PyTorch}
+}
+
+@online{transformer,
+	title={Natural Language Processing: the age of Transformers},
+	howpublished={\url{https://blog.scaleway.com/}},
+	author={Scaleway}
+}
+
+@article{glue,
+	title={GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding}, 
+	author={Alex Wang and Amanpreet Singh and Julian Michael and Felix Hill and Omer Levy and Samuel R. Bowman},
+	year={2019},
+	eprint={1804.07461},
+	archivePrefix={arXiv},
+	primaryClass={cs.CL}
+}
+
+@article{ngram,
+	title = {Class-Based \textit{n}-gram Models of Natural Language},
+	author = {Brown, Peter F.  and
+	Della Pietra, Vincent J.  and
+	deSouza, Peter V.  and
+	Lai, Jenifer C.  and
+	Mercer, Robert L.},
+	journal = {Computational Linguistics},
+	volume = {18},
+	number = {4},
+	year = {1992},
+	url = {https://www.aclweb.org/anthology/J92-4003},
+	pages = {467--480},
+}
+
+@article{BERT,
+	author    = {Jacob Devlin and
+	Ming{-}Wei Chang and
+	Kenton Lee and
+	Kristina Toutanova},
+	title     = {{BERT:} Pre-training of Deep Bidirectional Transformers for Language
+	Understanding},
+	journal   = {CoRR},
+	volume    = {abs/1810.04805},
+	year      = {2018},
+	url       = {http://arxiv.org/abs/1810.04805},
+	archivePrefix = {arXiv},
+	eprint    = {1810.04805},
+	timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},
+	biburl    = {https://dblp.org/rec/journals/corr/abs-1810-04805.bib},
+	bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{attention,
+	author    = {Ashish Vaswani and
+	Noam Shazeer and
+	Niki Parmar and
+	Jakob Uszkoreit and
+	Llion Jones and
+	Aidan N. Gomez and
+	Lukasz Kaiser and
+	Illia Polosukhin},
+	title     = {Attention Is All You Need},
+	journal   = {CoRR},
+	volume    = {abs/1706.03762},
+	year      = {2017},
+	url       = {http://arxiv.org/abs/1706.03762},
+	archivePrefix = {arXiv},
+	eprint    = {1706.03762},
+	timestamp = {Mon, 13 Aug 2018 16:48:37 +0200},
+	biburl    = {https://dblp.org/rec/journals/corr/VaswaniSPUJGKP17.bib},
+	bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{RNN,
+	title={Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation}, 
+	author={Kyunghyun Cho and Bart van Merrienboer and Caglar Gulcehre and Dzmitry Bahdanau and Fethi Bougares and Holger Schwenk and Yoshua Bengio},
+	year={2014},
+	eprint={1406.1078},
+	archivePrefix={arXiv},
+	primaryClass={cs.CL}
+}
+
+@online{google-translate, 
+	title={A Neural Network for Machine Translation, at Production Scale}, 
+	howpublished={\url{https://ai.googleblog.com/2016/09/a-neural-network-for-machine.html}}, 
+	author={Google AI Blog}
+}
+
+@article{LAMB,
+	title={Large Batch Optimization for Deep Learning: Training BERT in 76 minutes}, 
+	author={Yang You and Jing Li and Sashank Reddi and Jonathan Hseu and Sanjiv Kumar and Srinadh Bhojanapalli and Xiaodan Song and James Demmel and Kurt Keutzer and Cho-Jui Hsieh},
+	year={2020},
+	eprint={1904.00962},
+	archivePrefix={arXiv},
+	primaryClass={cs.LG}
+}
+
+@article{shallue2019measuring,
+	title={Measuring the Effects of Data Parallelism on Neural Network Training}, 
+	author={Christopher J. Shallue and Jaehoon Lee and Joseph Antognini and Jascha Sohl-Dickstein and Roy Frostig and George E. Dahl},
+	year={2019},
+	eprint={1811.03600},
+	archivePrefix={arXiv},
+	primaryClass={cs.LG}
+}
+
+@article{krizhevsky2014weird,
+	title={One weird trick for parallelizing convolutional neural networks}, 
+	author={Alex Krizhevsky},
+	year={2014},
+	eprint={1404.5997},
+	archivePrefix={arXiv},
+	primaryClass={cs.NE}
+}
+
+@article{LARS,
+	author = {You, Yang and Zhang, Zhao and Hsieh, Cho-Jui and Demmel, James and Keutzer, Kurt},
+	title = {ImageNet Training in Minutes},
+	year = {2018},
+	isbn = {9781450365109},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3225058.3225069},
+	doi = {10.1145/3225058.3225069},
+	abstract = {In this paper, we investigate large scale computers' capability of speeding up deep neural networks (DNN) training. Our approach is to use large batch size, powered by the Layer-wise Adaptive Rate Scaling (LARS) algorithm, for efficient usage of massive computing resources. Our approach is generic, as we empirically evaluate the effectiveness on two neural networks: AlexNet and ResNet-50 trained with the ImageNet-1k dataset while preserving the state-of-the-art test accuracy. Compared to the baseline of a previous study from a group of researchers at Facebook, our approach shows higher test accuracy on batch sizes that are larger than 16K. Using 2,048 Intel Xeon Platinum 8160 processors, we reduce the 100-epoch AlexNet training time from hours to 11 minutes. With 2,048 Intel Xeon Phi 7250 Processors, we reduce the 90-epoch ResNet-50 training time from hours to 20 minutes. Our implementation is open source and has been released in the Intel distribution of Caffe v1.0.7.},
+	booktitle = {Proceedings of the 47th International Conference on Parallel Processing},
+	articleno = {1},
+	numpages = {10},
+	keywords = {Fast Deep Neural Networks Training, Distributed Machine Learning},
+	series = {ICPP 2018}
+}
+
+@article{TPUpaper,
+	title={In-Datacenter Performance Analysis of a Tensor Processing Unit}, 
+	author={Norman P. Jouppi and Cliff Young and Nishant Patil and David Patterson and Gaurav Agrawal and Raminder Bajwa and Sarah Bates and Suresh Bhatia and Nan Boden and Al Borchers and Rick Boyle and Pierre-luc Cantin and Clifford Chao and Chris Clark and Jeremy Coriell and Mike Daley and Matt Dau and Jeffrey Dean and Ben Gelb and Tara Vazir Ghaemmaghami and Rajendra Gottipati and William Gulland and Robert Hagmann and C. Richard Ho and Doug Hogberg and John Hu and Robert Hundt and Dan Hurt and Julian Ibarz and Aaron Jaffey and Alek Jaworski and Alexander Kaplan and Harshit Khaitan and Andy Koch and Naveen Kumar and Steve Lacy and James Laudon and James Law and Diemthu Le and Chris Leary and Zhuyuan Liu and Kyle Lucke and Alan Lundin and Gordon MacKean and Adriana Maggiore and Maire Mahony and Kieran Miller and Rahul Nagarajan and Ravi Narayanaswami and Ray Ni and Kathy Nix and Thomas Norrie and Mark Omernick and Narayana Penukonda and Andy Phelps and Jonathan Ross and Matt Ross and Amir Salek and Emad Samadiani and Chris Severn and Gregory Sizikov and Matthew Snelham and Jed Souter and Dan Steinberg and Andy Swing and Mercedes Tan and Gregory Thorson and Bo Tian and Horia Toma and Erick Tuttle and Vijay Vasudevan and Richard Walter and Walter Wang and Eric Wilcox and Doe Hyun Yoon},
+	year={2017},
+	eprint={1704.04760},
+	archivePrefix={arXiv},
+	primaryClass={cs.AR}
+}
+
+@online{MAC,
+	title={FPGA Architectures from ‘A’ to ‘Z’ : Part 2},
+	howpublished={\url{https://www.eetimes.com/fpga-architectures-from-a-to-z-part-2/#}},
+	author={Clive Maxfield}
+}
+
+@online{tpubert,
+	title={TPUs vs GPUs for Transformers(BERT)},
+	howpublished={\url{https://timdettmers.com/2018/10/17/tpus-vs-gpus-for-transformers-bert/}},
+	author={Tim Dettmers}
+}
+
+@article{XLM-ROBERTA,
+	title={Unsupervised Cross-lingual Representation Learning at Scale}, 
+	author={Alexis Conneau and Kartikay Khandelwal and Naman Goyal and Vishrav Chaudhary and Guillaume Wenzek and Francisco Guzmán and Edouard Grave and Myle Ott and Luke Zettlemoyer and Veselin Stoyanov},
+	year={2020},
+	eprint={1911.02116},
+	archivePrefix={arXiv},
+	primaryClass={cs.CL}
+}

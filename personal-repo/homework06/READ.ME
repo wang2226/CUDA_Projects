@@ -1,0 +1,45 @@
+Homework 4
+Due: Dec 8, 11:59 PM
+----------
+Implement the Conjugate Gradient the GPU using CUDA.
+
+The function that needs implemented are:
+1) vec_add_kernel
+   This is a CUDA kernel that executes a vetor add z[i] = c * x[i] + y[i].
+   This kernel is called by the vec_add_gpu function.
+
+2) reduce_kernel
+   This is a CUDA kernel that is used to reduce an array. 
+   This is the "First add during load" version of the kernel from Lecture 11 from Nov 3rd.
+   You are welcome to implement more advanced version that perform better.
+
+3) vec_mul_kernel
+   This is a CUDA kernel that does z[i] = c * x[i] * y[i]
+
+4) ddot_gpu
+   This function does dot product between arrays x and y.
+   This is NOT a CUDA kernel, but a function that calls CUDA kernels to calculate the dot product.
+   (Hint: This function should use vec_mul_kernel and reduce_kernel)
+
+Do not forget to write a report on your findings.
+
+Things to note:
+---------------
+1) I have provided a skeleton code for conjugate gradient (cg_gpu_csr).
+   You are free to change it and implement your own.
+
+2) I have gotten rid of incx and incy, as it seems to have created some confusion. Assume all elements are stored consecutively (i.e., not stored in a strided fashion).
+
+3) It should behave similarly to the CPU version.
+   For example, 
+   ./cg cant/cant.mtx cant/b.mtx ./test.mtx 20000 1e-6 1
+   should take about 13K iterations to converge.
+
+4) Email me with any questions if you are confused about anything.
+
+
+Extra Credit (2/10):
+-------------
+You may also implement Conjugate Gradient using ELLPACK SpMV kernel for extra credit.
+I have provided memory allocation and spmv_gpu_ell function for calling ELL SpMV.
+You just have to complete spmv_kernel_ell and create another function (e.g., cg_gpu_ell) to do CG using the ELLPACK kernel.

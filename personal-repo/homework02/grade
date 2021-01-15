@@ -1,0 +1,7 @@
+8/10
+Your O(n) parallel prefix sum is slightly inefficient.
+The numbers on your report does not make any sense.
+  2^80 is an EXTREMELY large number and I honestly doubt you ran this.
+  Remember that unsigned 64-bit integer can only store up to 2^64.
+  The execution time (which is what I assume is in the tables) does not change for different input size - this is extremely unlikely.
+

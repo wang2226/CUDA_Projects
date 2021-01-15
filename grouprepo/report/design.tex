@@ -1,0 +1,12 @@
+\subsection{Experiments}
+We did two type of experiments:
+\begin{itemize}
+    \item We tested how long it takes computer to calculate the best move given a input move. This is experiment is done for all methods we implemented.
+    \item We tested how long it takes computer to complete a whole game. We only tested this on PVS and Dynamic CUDA, due to limited computing resources.
+\end{itemize}
+
+\subsection{Experiment Setup}
+We tested our CPU code on department's ix server. It has two sockets with AMD Opteron 6376 on each socket. Each CPU has 8 cores, 16 threads. So, there are 32 hardware threads in total. We tested our GPU code on Google Cloud Computing Instance that has a Tesla V100 GPU, with 16GB of HBM2 memory, 900GB/sec memory bandwidth.
+
+\subsection{Testing for Correctness}
+The lack of a clear or correct answer made testing for correctness slightly harder than other algorithms as the 'best' move depends entirely on the heuristic function and there is no publicly available benchmark to verify our algorithm. In place of these checks for this work, we have instead compared any parallel/optimized code against the original serial CPU version to ensure that they return the same results. 

@@ -1,0 +1,38 @@
+Homework 4
+Due: Nov 24, 11:59 PM
+----------
+Implement the SpMV kernel on a GPU.
+This time, implement both CSR and ELLPACK/ITPACK (ELL) format as described 
+in the document from homework 3.
+
+The function that needs implemented are:
+1) convert_csr_to_ell
+   This functions runs on the CPU and creates the appropriate ELL format on the
+     CPU.
+2) allocate_csr_gpu
+   Allocate CSR data structure on the GPU and copy the necessary data from the 
+     CPU to the GPU for execution.
+3) spmv_kernel
+   CSR SpMV kernel on the GPU - this function is called from the spmv_gpu 
+     function which has already been implemented for you.
+4) allocate_ell_gpu
+   Allocate ELL data structure on the GPU and copy the necessary data from the 
+     CPU to the GPU for execution
+5) spmv_kernel_ell
+   ELL SpMV kernel on the GPU - this function is called from the spmv_gpu_ell 
+     function which has already been implemented for you.
+
+Things to note:
+---------------
+1) I have provided a skeleton code for you to use, as well as the function
+   prototypes for functions you may require to implement SpMV on GPU.
+   Read it carefully first.
+   Search "COMPLETE THIS FUNCTION" to see what needs to be implemented.
+
+2) GPU kernels and associated functions can be found in spmv.cu.
+
+3) I provide a templated function CopyData - use this to copy data from the CPU
+   to the GPU. If you do not use this, your performance numbers (i.e., GB/s) may
+   be incorrect.
+
+4) Email me with any questions if you are confused about anything.
